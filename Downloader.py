@@ -12,31 +12,31 @@ def downloader(link, format, name="Downloaded", dir=""):
         return False
 
 
-def similarLinksDownloader(pageLink, simLink, format, name="Downloaded", dir=""):
+def similar_links_downloader(page_link, sim_link, format, name="Downloaded", dir=""):
     try:
         downloader(
-            pageLink,
+            page_link,
             "html",
             "source",
             dir,
         )
-        sourceFile = open(f"{dir}source.html", "r")
+        source_file = open(f"{dir}source.html", "r")
         links = []
         repetitive = None
-        for line in sourceFile:
-            firstIndex = line.find(simLink)
-            lastIndex = 0
-            if firstIndex != -1:
-                lastIndex = line.find('"', firstIndex)
-                thisLink = line[firstIndex:lastIndex]
+        for line in source_file:
+            first_index = line.find(sim_link)
+            last_index = 0
+            if first_index != -1:
+                last_index = line.find('"', first_index)
+                this_link = line[first_index:last_index]
                 # Check for duplicate value
                 for link in links:
                     repetitive = False
-                    if thisLink == link:
+                    if this_link == link:
                         repetitive = True
                         break
                 if not repetitive:
-                    links.append(thisLink)
+                    links.append(this_link)
         for index, link in enumerate(links):
             x = downloader(
                 link,
@@ -44,7 +44,7 @@ def similarLinksDownloader(pageLink, simLink, format, name="Downloaded", dir="")
                 f"{name}-{index+1}",
                 dir,
             )
-        os.remove(sourceFile)
+        os.remove(source_file)
         return True
     except:
         return False
