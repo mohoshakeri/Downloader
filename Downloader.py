@@ -10,6 +10,8 @@ def downloader(link, format, name="Downloaded", dir=""):
         return True
     except:
         return False
+    finally:
+        file.close()
 
 
 def similar_links_downloader(page_link, sim_link, format, name="Downloaded", dir=""):
@@ -48,3 +50,5 @@ def similar_links_downloader(page_link, sim_link, format, name="Downloaded", dir
         return True
     except:
         return False
+    finally:
+        source_file.close()
